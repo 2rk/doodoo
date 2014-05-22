@@ -8,8 +8,13 @@ Gem::Specification.new do |spec|
   spec.version       = Doodoo::VERSION
   spec.authors       = ["Matt Connolly"]
   spec.email         = ["matt.connolly@tworedkites.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{A set of tools to help with CanCan.}
+  spec.description   = <<EOF
+A set of tools to help with CanCan.
+
+Doodoo provides a module for use with Rails controllers that assists with authorisation,
+especially with nested routes.
+EOF
   spec.homepage      = ""
   spec.license       = "MIT"
 
