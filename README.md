@@ -1,6 +1,7 @@
 # Doodoo
 
-TODO: Write a gem description
+A set of tools to help with CanCan. Doodoo provides a module for use with Rails controllers that assists with
+authorisation, especially with nested routes.
 
 ## Installation
 
@@ -18,7 +19,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add to ApplicationController:
+
+    include Doodoo::NestedLoadAndAuthorize
+
+And then in controllers (For example a TasksController, nested under ProjectsController):
+
+    before_action do
+      # load task nested under project, only if params[:project_id] exists:
+      load_and_authorize_if_present :project do
+        load_and_authorize :task
+      end
+
+      # enforce nested load:
+      load_and_authorize :project do
+        load_and_authorize :task
+      end
+
+      # and for a shallow route:
+      load_and_authorize :task
+
+      # load without authorisation:
+      load_resource :task
+
+      # only specific actions
+      load_and_authorize :task, :only => [:show]
+
+      # supply a condition in should_load_task? method (can use a proc here too)
+      load_and_authorize :task, :if => :should_load_task?
+
+      # specific id parameter for another action:
+      load_and_authorize :task, :id_param => :task_id, :only => [:other_action]
+
+      # only load if parameter present in menu:
+    end
+
 
 ## Contributing
 
